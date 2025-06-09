@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace LibraryManager
 {
@@ -13,6 +8,7 @@ namespace LibraryManager
         public string Title { get; set; }
         public int YearPublished { get; set; }
 
+        // Constructor
         public LibraryItem(int id, string title, int yearPublished)
         {
             ID = id;
@@ -22,58 +18,65 @@ namespace LibraryManager
 
         public override string ToString()
         {
-            return $"ID: {ID}, Title: {Title}, Year: {YearPublished}";
+            return $"{ID}: {Title} ({YearPublished})";
         }
-
-
-        public class Book : LibraryItem
-        {
-            public string Author { get; set; }
-            public string Genre { get; set; }
-
-            public Book(int id, string title, int yearPublished, string author, string genre)
-                : base(id, title, yearPublished)
-            {
-                Author = author;
-                Genre = genre;
-            }
-
-            public override string ToString()
-            {
-                return $"{base.ToString()}, Author: {Author}, Genre: {Genre}";
-            }
-        }
-        class Magazine : LibraryItem //Defines a Magazine class that inherit stuff from 
-        {
-            public string IssueNumber { get; set; }
-            public int Month { get; set; }
-
-            public Magazine(int id, string title, int yearPublished, string issueNumber, int month)
-                : base(id, title, yearPublished)
-            {
-                IssueNumber = issueNumber;
-                Month = month;
-            }
-            public override string ToString() // Overrides the ToString() method to provide a string representation of the Book
-            {
-                return $"{base.ToString()}, Author: {IssueNumber}, Genre: {Month}"; // Returns a string with all Book details, including those from LibraryItem
-            }
-
-        }
-        class DVD : LibraryItem
-        {
-            public string Director { get; set; }
-            public int Duration { get; set; } // Duration in minutes
-
-            public DVD(int id, string title, int yearPublished, string director, int duration)
-                : base(id, title, yearPublished)
-            {
-                Director = director;
-                Duration = duration;
-            }
-
-        }
-
     }
 
+    // Separate classes - NOT nested!
+    public class Book : LibraryItem
+    {
+        public string Author { get; set; }
+        public string Genre { get; set; }
+
+        // Constructor that calls base constructor
+        public Book(int id, string title, int yearPublished, string author, string genre)
+            : base(id, title, yearPublished)
+        {
+            Author = author;
+            Genre = genre;
+        }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, Author: {Author}, Genre: {Genre}";
+        }
+    }
+
+    public class Magazine : LibraryItem
+    {
+        public int IssueNumber { get; set; }
+        public string Month { get; set; }
+
+        // Constructor that calls base constructor
+        public Magazine(int id, string title, int yearPublished, int issueNumber, string month)
+            : base(id, title, yearPublished)
+        {
+            IssueNumber = issueNumber;
+            Month = month;
+        }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, Issue: {IssueNumber}, Month: {Month}";
+        }
+    }
+
+    public class DVD : LibraryItem
+    {
+        public string Director { get; set; }
+        public int Duration { get; set; }
+
+        // Constructor that calls base constructor
+        public DVD(int id, string title, int yearPublished, string director, int duration)
+            : base(id, title, yearPublished)
+        {
+            Director = director;
+            Duration = duration;
+        }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}, Director: {Director}, Duration: {Duration} mins";
+        }
+    }
 }
