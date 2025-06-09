@@ -57,6 +57,19 @@ class Program
         Console.WriteLine("Item added successfully.");
     }
 
+    static void RemoveItem()
+    {
+        Console.Write("Enter ID to remove: ");
+        if (!int.TryParse(Console.ReadLine(), out int id))
+            throw new ArgumentException("Invalid ID.");
+
+        int removed = libraryItems.RemoveAll(item => item.ID == id);
+        if (removed > 0)
+            Console.WriteLine("Item removed successfully.");
+        else
+            Console.WriteLine("Item not found.");
+    }
+
     static void Main(string[] args)
     {
         while (true)
@@ -75,7 +88,7 @@ class Program
                 switch (choice)
                 {
                     case "1": AddItem(); break;
-                    //case "2": RemoveItem(); break;
+                    case "2": RemoveItem(); break;
                     //case "3": SearchItem(); break;
                     //case "4": DisplayAllItems(); break;
                     case "5": return;
