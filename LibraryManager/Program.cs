@@ -70,6 +70,19 @@ class Program
             Console.WriteLine("Item not found.");
     }
 
+    static void SearchItem()
+    {
+        Console.Write("Enter ID to search: ");
+        if (!int.TryParse(Console.ReadLine(), out int id))
+            throw new ArgumentException("Invalid ID.");
+
+        var item = libraryItems.FirstOrDefault(item => item.ID == id);
+        if (item != null)
+            Console.WriteLine(item);
+        else
+            Console.WriteLine("Item not found.");
+    }
+
     static void Main(string[] args)
     {
         while (true)
@@ -89,7 +102,7 @@ class Program
                 {
                     case "1": AddItem(); break;
                     case "2": RemoveItem(); break;
-                    //case "3": SearchItem(); break;
+                    case "3": SearchItem(); break;
                     //case "4": DisplayAllItems(); break;
                     case "5": return;
                     default: Console.WriteLine("Invalid choice. Try again."); break;
