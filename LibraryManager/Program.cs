@@ -83,6 +83,20 @@ class Program
             Console.WriteLine("Item not found.");
     }
 
+    static void DisplayAllItems()
+    {
+        if (libraryItems.Count == 0)
+        {
+            Console.WriteLine("No items in the library.");
+            return;
+        }
+        Console.WriteLine("\nAll Library Items:");
+        foreach (var item in libraryItems)
+        {
+            Console.WriteLine(item);
+        }
+    }
+
     static void Main(string[] args)
     {
         while (true)
@@ -103,7 +117,7 @@ class Program
                     case "1": AddItem(); break;
                     case "2": RemoveItem(); break;
                     case "3": SearchItem(); break;
-                    //case "4": DisplayAllItems(); break;
+                    case "4": DisplayAllItems(); break;
                     case "5": return;
                     default: Console.WriteLine("Invalid choice. Try again."); break;
                 }
